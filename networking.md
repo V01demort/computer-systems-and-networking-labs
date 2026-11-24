@@ -1,29 +1,26 @@
-# Classroom networking and DHCP
+# Networking and DHCP
 
 [Back to overview](README.md)
 
-## Context
+## Lab work
 
-Practices 4–6 covered classroom LAN setup, switch management, IP cameras, DHCP, FTP and IIS. My designated role in Practice 6 was **DHCP Expert**. The following notes summarize the networking work reported during the course.
-
-## Practical work
+During practices 4–6, we worked with classroom networks and switch management. My role in practice 6 was DHCP configuration.
 
 - Configured dynamic IP addressing in the classroom LAN.
-- Checked host IP configuration using `ipconfig`.
-- Used `ping` to check connectivity and PuTTY/Telnet for switch management exercises.
+- Checked IP settings using `ipconfig`.
+- Used `ping` to check connectivity.
+- Worked with PuTTY and Telnet during switch management exercises.
 
-## Diagnostic reference
+## Commands and tools
 
-| Tool or concept | Purpose |
+| Tool | Purpose |
 | --- | --- |
-| `ipconfig` | View IPv4 configuration. |
-| `ipconfig /all` | Inspect adapter details, DHCP state and addressing information. |
-| `ping` | Test IP reachability to a specified host. |
-| DHCP lease list | Check assigned addresses and associated client identifiers. |
-| PuTTY / Telnet | Access supported management interfaces in an authorized lab. |
+| `ipconfig` | View IP configuration |
+| `ipconfig /all` | View adapter and DHCP details |
+| `ping` | Check IP reachability |
+| DHCP lease list | View assigned addresses |
+| PuTTY / Telnet | Connect to lab management interfaces |
 
-A typical classroom troubleshooting workflow is to check the physical connection, inspect IP settings, confirm the addressing scheme and then test reachability. A failed ping alone does not establish that a device is offline; firewall rules or routing can also affect the result. Telnet is a legacy plaintext protocol; SSH is preferred for modern management where supported.
+I start troubleshooting by checking the connection, IP settings and network reachability. Telnet was used in the lab; SSH is preferable where supported.
 
-## Evidence
-
-These notes are a retrospective summary, not a reproduced session log. No verified DHCP lease table or successful connectivity screenshot is available for publication. Actual lab addresses and credentials are omitted. FTP, IIS and camera configuration are not presented as independently demonstrated achievements.
+These are notes from the classroom exercises. I did not retain screenshots of the networking results.
