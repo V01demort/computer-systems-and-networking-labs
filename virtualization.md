@@ -1,57 +1,41 @@
-# Virtualization, LiveUSB and Windows troubleshooting
+# Virtualization, LiveUSB and troubleshooting
 
 [Back to overview](README.md)
 
-Practice 7 focused on virtual machines and bootable USB environments. The examples below document the Windows NT configuration and LiveUSB work from my lab session.
+## VMware Workstation
 
-## 1. VMware Workstation
-
-The VM configuration wizard used the following settings:
+For practice 7, I configured a virtual machine for Windows NT.
 
 | Setting | Value |
 | --- | --- |
 | Guest OS | Windows NT |
-| Virtual disk controller | SCSI |
-| Virtual disk capacity | 4 GB |
-| Memory | 256 MB |
-| Network adapter | NAT |
+| Disk controller | SCSI |
+| Disk size | 4 GB |
+| RAM | 256 MB |
+| Network | NAT |
 
-The wizard indicated that NVMe was not supported by the selected Windows NT guest. SCSI was selected for the virtual disk.
+NVMe was not supported for this guest, so I selected SCSI.
 
-![VMware virtual disk type](screenshots/01-virtual-disk-type.png)
+![Virtual disk type](screenshots/01-virtual-disk-type.png)
 
-*Virtual disk selection.*
+![VM configuration before creation](screenshots/02-vm-configuration.png)
 
-![VMware virtual machine configuration](screenshots/02-vm-configuration.png)
+The screenshots show the configuration before VM creation, not the completed OS installation.
 
-*Configuration summary before VM creation. Local path masked.*
+## LiveUSB
 
-These screenshots document the VM setup, not a completed guest OS installation. Legacy Windows should be kept in an isolated or otherwise controlled lab environment.
+I used UltraISO to write the course image to a USB drive using USB-HDD+ with verification enabled. The writing and verification completed successfully, and I used the drive for the boot exercise.
 
-## 2. LiveUSB
+![USB writing and verification](screenshots/03-liveusb-verification.png)
 
-I used UltraISO to write the course LiveUSB image to a USB drive. The write method was USB-HDD+, with verification enabled. The application reported both successful verification and successful writing.
+The screenshot shows USB creation. Local paths in the screenshots are masked.
 
-![UltraISO successful USB writing and verification](screenshots/03-liveusb-verification.png)
+## Touchpad troubleshooting
 
-*Write and verification log at 100%. Local image path masked.*
+The laptop touchpad did not work during the LiveUSB exercise. I checked the HID over I2C device and Intel Serial IO GPIO controller in Device Manager.
 
-The USB was then used for the boot exercise, as reported during the lab. The screenshot confirms media creation, not the subsequent boot. Writing a disk image can overwrite existing USB contents; the target drive must be checked before writing.
+![HID over I2C driver details](screenshots/04-hid-i2c-driver.png)
 
-## 3. Touchpad troubleshooting
+![Intel Serial IO driver details](screenshots/05-intel-serial-io-driver.png)
 
-**Problem:** The laptop touchpad did not work during the LiveUSB exercise.
-
-**Investigation:** I inspected the Windows HID over I2C device and Intel Serial IO GPIO host controller in Device Manager, including their driver files, providers and versions.
-
-![HID over I2C driver files](screenshots/04-hid-i2c-driver.png)
-
-*HID over I2C driver details, including `hidi2c.sys` and `mshidkmdf.sys`.*
-
-![Intel Serial IO GPIO driver details](screenshots/05-intel-serial-io-driver.png)
-
-*Intel Serial IO GPIO host controller driver details.*
-
-**Reported resolution:** Using the appropriate Lenovo driver and re-enumerating the device restored touchpad functionality. The retained screenshots show the diagnostic investigation; no separate post-fix screenshot is available.
-
-**Takeaway:** Driver compatibility and the underlying controller can matter when troubleshooting an input device, particularly in a temporary operating-system environment.
+The touchpad worked again after using the appropriate Lenovo driver and re-enumerating the device. I kept screenshots of the driver checks, but not of the final result.
